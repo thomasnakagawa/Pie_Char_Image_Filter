@@ -1,28 +1,26 @@
-PImage Img; 
-int gridsize = 20;
+PImage Global_Img; 
+int    Global_Gridsize = 20;
+String Global_FileName = "stripes.bmp";
 
 void setup(){
-   Img = loadImage("stripes.bmp");
-   //size(1600,900);
-   Img.resize(1600,900);
-   createImage(gridsize);
+   Global_Img = loadImage(Global_FileName);
+   
+   // screen size of 1600 by 900. Processing doesnt let you change the windows size with variables.
+   Global_Img.resize(1600,900);
+   
+   createImage(Global_Gridsize);
    fullScreen();
 } //<>//
-
-
-void draw(){
-
-}
 
 void keyPressed(){
     if(key == CODED){
        if(keyCode == UP){
-           gridsize++;
-           createImage(gridsize); 
+           Global_Gridsize++;
+           createImage(Global_Gridsize); 
        }
        else if(keyCode == DOWN){
-           gridsize--;
-           createImage(gridsize); 
+           Global_Gridsize--;
+           createImage(Global_Gridsize); 
        }
     }
 } 
@@ -32,11 +30,10 @@ void createImage(int gridsz){
    background(0);
    strokeWeight(0);
    ellipseMode(CENTER);
-   for(int i = 0; i < Img.height-gridsz; i += gridsz){
-     for(int j = 0; j < Img.width-gridsz; j += gridsz){
+   for(int i = 0; i < Global_Img.height-gridsz; i += gridsz){
+     for(int j = 0; j < Global_Img.width-gridsz; j += gridsz){
         color temp = getAvgColor(j,i, j+gridsz, i+gridsz);
         draw_tricolordots(j+offset,i+offset,temp, gridsz);
-        //draw_discretecolordots(j,i,temp);
      }
    }
 }
